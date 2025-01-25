@@ -34,6 +34,9 @@ export default function Navbar() {
           <Link href="#footer" className="font-poppins underline text-2xl font-semibold tracking-wide text-gray-700 hover:text-primary">
             About
           </Link>
+          <Link href="/signin" className="font-poppins underline text-2xl font-semibold tracking-wide text-gray-700 hover:text-primary">
+            Get Started
+          </Link>
         </div>
         <Link href="/" className="mx-4">
           <Image src={logo} alt="Logo" width={80} height={70} />
