@@ -4,7 +4,7 @@
 import React, { createContext, useContext, useState, ReactNode } from 'react';
 
 interface User {
-  cookieData: { table: string };
+  cookieData: { table: string, id: string, token: string };
   name: string;
   number: string;
   message: string;

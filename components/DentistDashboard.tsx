@@ -169,7 +169,7 @@ const handleClick = (type: 'specials' | 'calendar') => {
         </div>
       <div className="my-4">
       <div className='flex flex-col md:flex-row gap-4 items-center'> 
-        <CalendarTable currentDate={currentDate} setCurrentDate={setCurrentDate} calendarData={user.data.calendar} setDentistCalendar={setDentistCalendar} setCalendar={handleClick} />
+        <CalendarTable currentDate={currentDate} setCurrentDate={setCurrentDate} setDentistCalendar={setDentistCalendar} setCalendar={handleClick} />
         <SpecialsTable setSpecials={handleClick} setDentistSpecials={setDentistSpecials} specialsData={user.data.specials}/>
       </div>
         

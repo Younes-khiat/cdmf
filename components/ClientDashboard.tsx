@@ -8,6 +8,8 @@ import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 import Feedbacks from './Feedbacks'
+import { useUser } from '@/app/context/UserContext';
+
 
 const mockUser = {
   name: "John Doe",
@@ -27,23 +29,58 @@ export default function ClientDashboard() {
   const [time, setTime] = useState<string>()
   const [dentist, setDentist] = useState('')
   const [description, setDesciption] = useState('')
-  const [userId, setUserId] = useState<string | null>(null) // State to hold the user ID from the cookie
+  // const [userId, setUserId] = useState<string | null>(null) // State to hold the user ID from the cookie
+  // const [cookieData, setCookieData] = useState<{id: string} | null>(null)
+  const { user } = useUser();
 
+  useEffect(() => {
+    if (user) {
+      console.log('User data:', user);
+    }
+  }, [user]);
 
   useEffect(() => {
     // Extract user data from the cookie
-    const userCookie = document.cookie
-      .split('; ')
-      .find((row) => row.startsWith('user_data='))
-    if (userCookie) {
-      const cookieData = JSON.parse(decodeURIComponent(userCookie.split('=')[1]))
-      console.log("1: "+ cookieData);
-      setUserId(cookieData.id) // Set the user ID from the cookie
-    }
+    console.log("0")
+    const cookies = document.cookie
+    console.log("1")
+    console.log( cookies)
+    // cookies.forEach(cookie => {
+    //   console.log("Cookie name:", cookie.split('=')[0])
+    //   console.log("Cookie value:", cookie.split('=')[1])
+    // })
+    // const userCookie = cookies.find((row) => row.startsWith('user_data='))
+    // console.log("User cookie:", userCookie)
+    // const userCookie = document.cookie
+    //   .split('; ')
+    //   .find((row) => row.startsWith('user_data='))
+    // if (userCookie) {
+    //   setCookieData(JSON.parse(decodeURIComponent(userCookie.split('=')[1])))
+    //   console.log("1")
+    // }
+    console.log("2")
+  }, []) 
 
-  }, [])
+  // useEffect(() => {
+  //   if (cookieData) {
+  //     console.log("1: " + cookieData)
+  //     setUserId(cookieData.id) // Set the user ID from the cookie
+  //     console.log(cookieData.id)
+  //   }
+  // }, [cookieData])
+
+  
+
+
   const handleBookAppointment = async () => {
     console.log(8);
+    console.log(user.cookieData);
+    console.log(7);
+    const userId = user.cookieData.id;
+    console.log(userId);
+    console.log(description);
+    console.log(dentist);
+    console.log(date);
     if (!description || !dentist || !date || !userId) {
       console.log('Please fill all fields before booking the appointment.')
       return

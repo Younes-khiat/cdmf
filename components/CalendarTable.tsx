@@ -46,7 +46,6 @@ export default function CalendarTable({ currentDate, setCurrentDate, setCalendar
     
   }
 
-  // const selectedDate = format(currentDate, 'yyyy-MM-dd')
 
   useEffect(() => {
     const selectedDate = format(currentDate, 'yyyy-MM-dd')
