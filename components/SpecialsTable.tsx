@@ -42,6 +42,7 @@ const [client, setClient] = useState<string | null>(null)
             <TableRow key={index}>
               <TableCell>{client.full_name}</TableCell>
               <TableCell>{client.phone_number}</TableCell>
+              
               <TableCell>{client.next_session.split('T')[0]}</TableCell>
               <TableCell>{client.detail}</TableCell>
               <TableCell>{client.paiement} DA</TableCell>

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
+import { UserProvider } from '@/app/context/UserContext';
 import "./globals.css";
 
 const geistSans = localFont({
@@ -27,8 +28,11 @@ export default function RootLayout({
     <html lang="en">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        {children}
+        >
+        <UserProvider initialUser={{ cookieData: { table: "" }, name: "", number: "", message: "", data: { feedbacks: [], calendar: [], specials: [], stock: [] } }}>
+          {children}
+        </UserProvider>
+      
       </body>
     </html>
   );

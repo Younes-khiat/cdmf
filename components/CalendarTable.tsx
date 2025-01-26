@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { format } from 'date-fns'
 import { Calendar } from '@/components/ui/calendar'
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table'
@@ -12,18 +12,21 @@ import {
 import { Button } from '@/components/ui/button'
 import { Plus } from 'lucide-react'
 import NewClient  from '@/components/NewClient'
+import { useUser } from '@/app/context/UserContext'
 
 interface CalendarTableProps {
   currentDate: Date 
   setCurrentDate: (date: Date ) => void
-  calendarData: Array<{ full_name: string; phone_number: string, detail: string , paiement: string, paid: string }>
   setCalendar: (tableType: 'specials' | 'calendar') => void
   setDentistCalendar: (dentistCalendar: Array<{ full_name: string; phone_number: string, detail: string, paiement: string, paid: string }>) => void
 }
 
 
-export default function CalendarTable({ currentDate, setCurrentDate, calendarData, setCalendar, setDentistCalendar }: CalendarTableProps) {
+export default function CalendarTable({ currentDate, setCurrentDate, setCalendar, setDentistCalendar }: CalendarTableProps) {
   const [showNewClient, setShowNewClient] = useState(false)
+  const { user } = useUser()
+  const [filteredRows, setFilteredRows] = useState<Array<{ full_name: string; phone_number: string, detail: string, paiement: string, paid: string, date: string }>>([])
+
 
 
   const handleDateSelect = (selectedDate: Date | undefined) => {
@@ -31,15 +34,26 @@ export default function CalendarTable({ currentDate, setCurrentDate, calendarDat
       setCurrentDate(selectedDate);
     }
   }
-  const handleClick = (calendarData: Array<{ full_name: string; phone_number: string, detail: string, paiement: string, paid: string }>) => {
-    setDentistCalendar(calendarData)
+  const handleClick = () => {
+    setDentistCalendar(user.data.calendar)
     setCalendar('calendar')
 
   }
 
   const handleNewClientClick = () => {
     setShowNewClient(true)
+    console.log(user.data.calendar)
+    
   }
+
+  // const selectedDate = format(currentDate, 'yyyy-MM-dd')
+
+  useEffect(() => {
+    const selectedDate = format(currentDate, 'yyyy-MM-dd')
+    const filtered = user.data.calendar.filter(item => item.date.split('T')[0] === selectedDate)
+    setFilteredRows(filtered)
+    console.log(filtered)
+  }, [currentDate, user.data.calendar])
 
   return (<>
     <div className="w-full md:w-1/2 space-y-4">
@@ -60,7 +74,7 @@ export default function CalendarTable({ currentDate, setCurrentDate, calendarDat
       </Popover>
       <Table className="bg-white rounded-sm">
         <TableHeader>
-          <TableRow onClick={() => handleClick(calendarData)}>
+          <TableRow onClick={() => handleClick}>
             <TableHead>Full Name</TableHead>
             <TableHead>Phone Number</TableHead>
             <TableHead>Detail</TableHead>
@@ -69,7 +83,7 @@ export default function CalendarTable({ currentDate, setCurrentDate, calendarDat
           </TableRow>
         </TableHeader>
         <TableBody>
-          {Object.values(calendarData.slice(0, 5) || []).map((one, index) => (
+          { filteredRows.map((one, index) => (
             <TableRow key={index}>
               <TableCell>{one.full_name}</TableCell>
               <TableCell>{one.phone_number}</TableCell>

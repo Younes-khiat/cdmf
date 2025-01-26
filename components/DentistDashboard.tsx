@@ -10,6 +10,8 @@ import CalendarTable from './CalendarTable'
 import SpecialsTable from './SpecialsTable'
 import AllTables from './AllTables'
 import Feedbacks from './Feedbacks'
+import { useUser } from '@/app/context/UserContext';
+
 
 const mockUser = {
   name: "John Doe",
@@ -23,6 +25,9 @@ const dentists = [
 ]
 
 export default function DentistDashboard() {
+  const { user } = useUser();
+  
+
   const [currentDate, setCurrentDate] = useState(new Date() )
   const [dentistCalendar, setDentistCalendar] = useState<Array<{ full_name: string; phone_number: string, detail: string, paiement: string, paid: string }>>(
     [
@@ -164,8 +169,8 @@ const handleClick = (type: 'specials' | 'calendar') => {
         </div>
       <div className="my-4">
       <div className='flex flex-col md:flex-row gap-4 items-center'> 
-        <CalendarTable currentDate={currentDate} setCurrentDate={setCurrentDate} calendarData={dentistCalendar} setDentistCalendar={setDentistCalendar} setCalendar={handleClick} />
-        <SpecialsTable setSpecials={handleClick} setDentistSpecials={setDentistSpecials} specialsData={dentistSpecials}/>
+        <CalendarTable currentDate={currentDate} setCurrentDate={setCurrentDate} calendarData={user.data.calendar} setDentistCalendar={setDentistCalendar} setCalendar={handleClick} />
+        <SpecialsTable setSpecials={handleClick} setDentistSpecials={setDentistSpecials} specialsData={user.data.specials}/>
       </div>
         
         <AllTables disp={disp} setDisp={setDisp} data={tableData} type={tableType}/>

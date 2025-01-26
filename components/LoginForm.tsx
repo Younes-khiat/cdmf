@@ -5,11 +5,15 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { useRouter } from 'next/navigation'
+import { useUser } from '@/app/context/UserContext';
+
 
 export default function LoginForm() {
   const [userName, setUserName] = useState('')
   const [password, setPassword] = useState('')
   const router = useRouter() // Initialize the router
+  const { setUser } = useUser();
+
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -29,12 +33,13 @@ export default function LoginForm() {
         throw new Error('Invalid credentials or server error')
       }
 
-      const data = await response.json()
-      console.log('Login successful:', data)
+      const responseData = await response.json()
+      console.log('Login successful:', responseData)
+      setUser(responseData); // Store data in context
 
       
       // Redirect to the dashboard
-      router.push(`/dashboard/${data.table}`) // Use router.push for client-side navigation
+      router.push(`/dashboard/${responseData.cookieData.table}`) // Use router.push for client-side navigation
 
     } catch (err) {
       console.error('Error during login:', err)
