@@ -42,7 +42,7 @@ export default function CalendarTable({ currentDate, setCurrentDate, setCalendar
 
   const handleNewClientClick = () => {
     setShowNewClient(true)
-    console.log(user.data.calendar)
+    console.log(user.cookieData)
     
   }
 

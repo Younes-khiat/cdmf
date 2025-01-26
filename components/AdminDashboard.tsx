@@ -156,7 +156,7 @@ export default function AdminDashboard() {
       
       <div className="flex flex-col gap-8">
         <div className="flex flex-col md:flex-row gap-4 my-auto ">
-          <CalendarTable currentDate={currentDate} setCurrentDate={setCurrentDate}   calendarData={dentistCalendar} setDentistCalendar={setDentistCalendar} setCalendar={handleClick} />
+          <CalendarTable currentDate={currentDate} setCurrentDate={setCurrentDate} setDentistCalendar={setDentistCalendar} setCalendar={handleClick} />
           <SpecialsTable specialsData={dentistSpecials} setDentistSpecials={setDentistSpecials} setSpecials={handleClick}/>
         </div>
         <div className="flex flex-col md:flex-row gap-4 my-auto">

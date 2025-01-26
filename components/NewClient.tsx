@@ -8,6 +8,7 @@ import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 import { X } from 'lucide-react'
+// import { useUser } from '@/app/context/UserContext'
 
 interface NewClientProps {
   setShowNewClient: (showNewClient: boolean) => void
@@ -21,15 +22,20 @@ export default function NewClient({ setShowNewClient }: NewClientProps) {
   const [userId, setUserId] = useState<string | null>('1') 
 
   const handleBookAppointment = async () => {
+    
     console.log(8);
-    if (!description || !dentist || !date || !userId) {
+    if (!description || !dentist || !date || !time || !userId) {
       console.log('Please fill all fields before booking the appointment.')
       return
     }
     const [medicFirstName, medicLastName] = dentist.split(' ');
     const clientID = userId;
-    console.log(document.cookie);
-    console.log(clientID + medicFirstName + medicLastName + description + date);
+    console.log(clientID);
+    console.log(medicFirstName);
+    console.log(medicLastName);
+    console.log(description);
+    console.log(date);
+    console.log(time);
     try {
       console.log("22");
       const response = await fetch('http://localhost:3006/client/reserve', {
@@ -40,6 +46,7 @@ export default function NewClient({ setShowNewClient }: NewClientProps) {
         body: JSON.stringify({
           clientID, // Send the user ID from the cookie
           date,
+          time,
           medicFirstName,
           medicLastName,
           description,

@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { Button } from '@/components/ui/button'
 import { Calendar } from '@/components/ui/calendar'
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
@@ -29,45 +29,43 @@ export default function ClientDashboard() {
   const [time, setTime] = useState<string>()
   const [dentist, setDentist] = useState('')
   const [description, setDesciption] = useState('')
-  // const [userId, setUserId] = useState<string | null>(null) // State to hold the user ID from the cookie
-  // const [cookieData, setCookieData] = useState<{id: string} | null>(null)
   const { user } = useUser();
 
-  useEffect(() => {
-    if (user) {
-      console.log('User data:', user);
-    }
-  }, [user]);
-
-  useEffect(() => {
-    // Extract user data from the cookie
-    console.log("0")
-    const cookies = document.cookie
-    console.log("1")
-    console.log( cookies)
-    // cookies.forEach(cookie => {
-    //   console.log("Cookie name:", cookie.split('=')[0])
-    //   console.log("Cookie value:", cookie.split('=')[1])
-    // })
-    // const userCookie = cookies.find((row) => row.startsWith('user_data='))
-    // console.log("User cookie:", userCookie)
-    // const userCookie = document.cookie
-    //   .split('; ')
-    //   .find((row) => row.startsWith('user_data='))
-    // if (userCookie) {
-    //   setCookieData(JSON.parse(decodeURIComponent(userCookie.split('=')[1])))
-    //   console.log("1")
-    // }
-    console.log("2")
-  }, []) 
+  // useEffect(() => {
+  //   if (user) {
+  //     console.log('User data:', user);
+  //   }
+  // }, [user]);
 
   // useEffect(() => {
-  //   if (cookieData) {
-  //     console.log("1: " + cookieData)
-  //     setUserId(cookieData.id) // Set the user ID from the cookie
-  //     console.log(cookieData.id)
-  //   }
-  // }, [cookieData])
+  //   // Extract user data from the cookie
+  //   console.log("0")
+  //   const cookies = document.cookie
+  //   console.log("1")
+  //   console.log( cookies)
+  //   // cookies.forEach(cookie => {
+  //   //   console.log("Cookie name:", cookie.split('=')[0])
+  //   //   console.log("Cookie value:", cookie.split('=')[1])
+  //   // })
+  //   // const userCookie = cookies.find((row) => row.startsWith('user_data='))
+  //   // console.log("User cookie:", userCookie)
+  //   // const userCookie = document.cookie
+  //   //   .split('; ')
+  //   //   .find((row) => row.startsWith('user_data='))
+  //   // if (userCookie) {
+  //   //   setCookieData(JSON.parse(decodeURIComponent(userCookie.split('=')[1])))
+  //   //   console.log("1")
+  //   // }
+  //   console.log("2")
+  // }, []) 
+
+  // // useEffect(() => {
+  // //   if (cookieData) {
+  // //     console.log("1: " + cookieData)
+  // //     setUserId(cookieData.id) // Set the user ID from the cookie
+  // //     console.log(cookieData.id)
+  // //   }
+  // // }, [cookieData])
 
   
 
